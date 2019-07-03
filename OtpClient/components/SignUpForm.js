@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {View, Text} from 'react-native';
-import {FormLabel, FormInput, Button} from 'react-native-elements';
+import {View} from 'react-native';
+import {Input, Button} from 'react-native-elements';
 import axios from 'axios';
 
 
@@ -15,6 +15,7 @@ class SignUpForm extends Component{
 
     handleSubmit = async () => {
         
+        
        try { await axios.post(`${ROOT_URL}/createUser`, {phone: this.state.phone,});
         await axios.post(`${ROOT_URL}/reqOneTimePass`, {phone: this.state.phone});
     } catch(error){
@@ -25,9 +26,11 @@ class SignUpForm extends Component{
         return(
             <View>
                  <View style={{marginBottom: 10}}>
-                     <FormLabel>Enter Phone Number</FormLabel>
-                      <FormInput value={this.state.phone}
-                      onChangeText={phone => this.setState({phone})}/>
+                      <Input
+                      label="Enter Phone Number"
+                      value={this.state.phone}
+                      onChangeText={phone => this.setState({phone})}
+                      />
                 </View>
                 <Button 
                 onPress={this.handleSubmit.bind(this)}
